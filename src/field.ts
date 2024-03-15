@@ -31,6 +31,10 @@ export class Field {
     return new Field(0n);
   }
 
+  static random() {
+    return new Field(toBigInt(randomBytes(32)) % PRIME);
+  }
+
   hex(): string {
     return zeroPadValue(toBeHex(this.value), 32);
   }

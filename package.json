@@ -49,6 +49,7 @@
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.1.0",
     "@tsconfig/recommended": "^1.0.3",
+    "@types/jest": "^29.5.12",
     "dts-cli": "^2.0.4",
     "husky": "^9.0.11",
     "size-limit": "^11.1.0",
