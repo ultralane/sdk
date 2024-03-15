@@ -56,6 +56,8 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
+    "@noir-lang/backend_barretenberg": "0.25.0-00d6494.nightly",
+    "@noir-lang/noir_js": "0.25.0-00d6494.nightly",
     "ethers": "^6.11.1"
   }
 }

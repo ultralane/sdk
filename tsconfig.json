@@ -5,6 +5,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "target": "esnext",
-    "allowImportingTsExtensions": false
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true
   }
 }

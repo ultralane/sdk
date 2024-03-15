@@ -31,6 +31,10 @@ export class Field {
     return new Field(0n);
   }
 
+  hex(): string {
+    return zeroPadValue(toBeHex(this.value), 32);
+  }
+
   add(other: Field): Field {
     return new Field((this.value + other.value) % PRIME);
   }
