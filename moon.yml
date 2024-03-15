@@ -1,0 +1,25 @@
+language: 'typescript'
+
+dependsOn:
+  - 'circuits'
+
+tasks:
+  install:
+    command: 'pnpm install'
+  build:
+    command: 'pnpm run build'
+    deps:
+      - '^:build'
+    inputs:
+      - 'src'
+    outputs:
+      - 'dist'
+  test:
+    command: 'pnpm run test'
+    deps:
+      - '^:build'
+      - 'build'
+  clean:
+    command: 'rm -rf dist'
+  fmt:
+    command: 'pnpm run fmt'
