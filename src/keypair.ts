@@ -25,7 +25,7 @@ export class KeyPair {
     return keypair;
   }
 
-  static async randomAsync(): Promise<KeyPair> {
+  static async random(): Promise<KeyPair> {
     return await KeyPair.newAsync(Field.random());
   }
 
