@@ -33,7 +33,6 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "peerDependencies": {},
   "engines": {
     "node": ">=12"
   },
@@ -55,5 +54,8 @@
     "size-limit": "^11.1.0",
     "tslib": "^2.6.2",
     "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "ethers": "^6.11.1"
   }
 }
