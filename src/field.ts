@@ -50,4 +50,32 @@ export class Field {
   mul(other: Field): Field {
     return new Field((this.value * other.value) % PRIME);
   }
+
+  neg(): Field {
+    return new Field((PRIME - this.value) % PRIME);
+  }
+
+  isNeg(): boolean {
+    return this.value > PRIME / 2n;
+  }
+
+  gt(other: Field): boolean {
+    return this.value > other.value;
+  }
+
+  lt(other: Field): boolean {
+    return this.value < other.value;
+  }
+
+  eq(other: Field): boolean {
+    return this.value === other.value;
+  }
+
+  gte(other: Field): boolean {
+    return this.value >= other.value;
+  }
+
+  lte(other: Field): boolean {
+    return this.value <= other.value;
+  }
 }
