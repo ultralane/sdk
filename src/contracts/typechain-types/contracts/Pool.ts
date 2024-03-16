@@ -31,6 +31,7 @@ export interface PoolInterface extends Interface {
       | "ZERO_COMMITMENT"
       | "ZERO_NULLIFIER"
       | "ZERO_ROOT"
+      | "allNoteCommitments"
       | "collect"
       | "compute"
       | "currentRootIndex"
@@ -43,6 +44,8 @@ export interface PoolInterface extends Interface {
       | "levels"
       | "nextIndex"
       | "noteCommitments"
+      | "noteCommitmentsLength"
+      | "noteCommitmentsPaginated"
       | "noteVerifier"
       | "roots"
       | "splitJoinVerifier"
@@ -72,6 +75,10 @@ export interface PoolInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "ZERO_ROOT", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "allNoteCommitments",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "collect",
     values: [
@@ -122,6 +129,14 @@ export interface PoolInterface extends Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "noteCommitmentsLength",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "noteCommitmentsPaginated",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "noteVerifier",
     values?: undefined
   ): string;
@@ -154,6 +169,10 @@ export interface PoolInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "ZERO_ROOT", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "allNoteCommitments",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "collect", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "compute", data: BytesLike): Result;
   decodeFunctionResult(
@@ -185,6 +204,14 @@ export interface PoolInterface extends Interface {
   decodeFunctionResult(functionFragment: "nextIndex", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "noteCommitments",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "noteCommitmentsLength",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "noteCommitmentsPaginated",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -278,6 +305,8 @@ export interface Pool extends BaseContract {
 
   ZERO_ROOT: TypedContractMethod<[], [bigint], "view">;
 
+  allNoteCommitments: TypedContractMethod<[], [bigint[]], "view">;
+
   collect: TypedContractMethod<
     [
       token: AddressLike,
@@ -321,6 +350,14 @@ export interface Pool extends BaseContract {
 
   noteCommitments: TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
 
+  noteCommitmentsLength: TypedContractMethod<[], [bigint], "view">;
+
+  noteCommitmentsPaginated: TypedContractMethod<
+    [start: BigNumberish, length: BigNumberish],
+    [bigint[]],
+    "view"
+  >;
+
   noteVerifier: TypedContractMethod<[], [string], "view">;
 
   roots: TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
@@ -356,6 +393,9 @@ export interface Pool extends BaseContract {
   getFunction(
     nameOrSignature: "ZERO_ROOT"
   ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "allNoteCommitments"
+  ): TypedContractMethod<[], [bigint[]], "view">;
   getFunction(
     nameOrSignature: "collect"
   ): TypedContractMethod<
@@ -407,6 +447,16 @@ export interface Pool extends BaseContract {
   getFunction(
     nameOrSignature: "noteCommitments"
   ): TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "noteCommitmentsLength"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "noteCommitmentsPaginated"
+  ): TypedContractMethod<
+    [start: BigNumberish, length: BigNumberish],
+    [bigint[]],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "noteVerifier"
   ): TypedContractMethod<[], [string], "view">;
