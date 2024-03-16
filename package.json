@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "analyze": "size-limit --why",
+    "contracts:update": "rm -rf src/contracts/deployments src/contracts/typechain-types && mkdir -p src/contracts && mkdir -p src/contracts && cp -r ../contracts/typechain-types src/contracts/. && cp -r ../contracts/deployments src/contracts/.",
     "build": "dts build && cp -r dist/sdk/src/. dist",
     "lint": "dts lint",
     "prepare": "dts build",

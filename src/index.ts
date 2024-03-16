@@ -7,3 +7,4 @@ export * from './note';
 export * from './input';
 export * from './note-merkle-tree';
 export * from './transaction';
+export * from './contracts';
