@@ -74,7 +74,7 @@ export class Note extends Commitable {
     };
   }
 
-  async from(json: NoteRaw) {
+  static async from(json: NoteRaw) {
     return new Note(
       Field.from(json.amount),
       await KeyPair.newAsync(Field.from(json.keypair.private_key)),
