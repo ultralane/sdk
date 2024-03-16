@@ -22,4 +22,4 @@ tasks:
   clean:
     command: 'rm -rf dist'
   fmt:
-    command: 'pnpm run fmt'
+    command: 'pnpm run lint'

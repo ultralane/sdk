@@ -1,5 +1,5 @@
 {
-  "name": "sdk",
+  "name": "@ultralane/sdk",
   "version": "0.1.0",
   "license": "MIT",
   "author": "Soham Zemse",
@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "analyze": "size-limit --why",
-    "build": "dts build",
+    "build": "dts build && cp -r dist/sdk/src/. dist",
     "lint": "dts lint",
     "prepare": "dts build",
     "size": "size-limit",
@@ -22,7 +22,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "dts lint"
-    }
+    }   
   },
   "prettier": {
     "printWidth": 80,

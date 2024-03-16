@@ -38,12 +38,16 @@ export class Field {
     return new Field(toBigInt(randomBytes(32)) % PRIME);
   }
 
-  hex(): string {
-    return zeroPadValue(toBeHex(this.value), 32);
+  hex(bytes32: boolean = true): string {
+    if (bytes32) {
+      return zeroPadValue(toBeHex(this.value), 32);
+    } else {
+      return toBeHex(this.value);
+    }
   }
 
   raw(): FieldRaw {
-    return this.hex();
+    return this.hex(false);
   }
 
   add(other: Field): Field {
