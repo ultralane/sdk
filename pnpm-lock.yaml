@@ -11,6 +11,9 @@ dependencies:
   '@noir-lang/noir_js':
     specifier: 0.25.0-00d6494.nightly
     version: 0.25.0-00d6494.nightly
+  '@ultralane/circuits':
+    specifier: ^0.1.0
+    version: link:../circuits
   ethers:
     specifier: ^6.11.1
     version: 6.11.1
