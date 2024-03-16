@@ -6,6 +6,9 @@ import SepoliaUSDC from './deployments/sepolia/USDC.json';
 import ArbsepPool from './deployments/arbsep/Pool.json';
 import ArbsepUSDC from './deployments/arbsep/USDC.json';
 
+import OpsepPool from './deployments/opsep/Pool.json';
+import OpsepUSDC from './deployments/opsep/USDC.json';
+
 import { Pool__factory, USDC__factory } from './typechain-types';
 
 export async function getContracts(runner: ContractRunner) {
@@ -28,6 +31,11 @@ export function getAddresses(chainId: bigint) {
       return {
         pool: ArbsepPool.address,
         usdc: ArbsepUSDC.address,
+      };
+    case 11155420n:
+      return {
+        pool: OpsepPool.address,
+        usdc: OpsepUSDC.address,
       };
     default:
       throw new Error(`ChainId ${chainId} not supported`);
