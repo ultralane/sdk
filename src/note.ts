@@ -1,10 +1,20 @@
+import { InputMap } from '@noir-lang/noir_js';
+import note_json from '@ultralane/circuits/bin/note/target/note.json';
+
 import { BigNumberish } from 'ethers';
 
 import { Field } from './field';
 import { hash } from './hash';
-import { KeyPair } from './keypair';
+import { KeyPair, KeyPairRaw } from './keypair';
+import { Commitable, circuit } from './utils';
 
-export class Note {
+export interface NoteRaw extends InputMap {
+  amount: string;
+  keypair: KeyPairRaw;
+  blinding: string;
+}
+
+export class Note extends Commitable {
   public amount: Field;
 
   constructor(
@@ -12,6 +22,7 @@ export class Note {
     public keypair: KeyPair,
     public blinding: Field = Field.random()
   ) {
+    super();
     this.amount = Field.from(amount);
   }
 
@@ -25,6 +36,10 @@ export class Note {
 
   static zero() {
     return new Note(Field.zero(), KeyPair.zero(), Field.zero());
+  }
+
+  static async circuit() {
+    return circuit(note_json);
   }
 
   async commitment(): Promise<Field> {
@@ -49,5 +64,33 @@ export class Note {
 
   async nullifierHex(merkle_index: Field): Promise<string> {
     return (await this.nullifier(merkle_index)).hex();
+  }
+
+  raw(): NoteRaw {
+    return {
+      amount: this.amount.raw(),
+      keypair: this.keypair.raw(),
+      blinding: this.blinding.raw(),
+    };
+  }
+
+  async from(json: NoteRaw) {
+    return new Note(
+      Field.from(json.amount),
+      await KeyPair.newAsync(Field.from(json.keypair.private_key)),
+      Field.from(json.blinding)
+    );
+  }
+
+  async publicInputs(): Promise<string[]> {
+    return [this.amount.raw(), await this.commitmentHex()];
+  }
+
+  async prove() {
+    const noir = await circuit(note_json);
+    const proof = await noir.generateProof({
+      input: this.raw(),
+    });
+    return proof;
   }
 }

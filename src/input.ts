@@ -1,5 +1,16 @@
-import { Field } from './field';
-import { Note } from './note';
+import { InputMap } from '@noir-lang/noir_js';
+
+import input_json from '@ultralane/circuits/bin/input/target/input.json';
+
+import { Field, FieldRaw } from './field';
+import { Note, NoteRaw } from './note';
+import { circuit } from './utils';
+
+export interface InputRaw extends InputMap {
+  note: NoteRaw;
+  path_index: FieldRaw;
+  path_elements: FieldRaw[];
+}
 
 export class Input {
   constructor(
@@ -15,6 +26,10 @@ export class Input {
     }
   }
 
+  static async circuit() {
+    return circuit(input_json);
+  }
+
   static async random(
     note?: Note,
     pathIndex?: Field,
@@ -28,5 +43,13 @@ export class Input {
       pathIndex ?? Field.random(),
       pathElements
     );
+  }
+
+  raw(): InputRaw {
+    return {
+      note: this.note.raw(),
+      path_index: this.pathIndex.raw(),
+      path_elements: this.pathElements.map((e) => e.raw()),
+    };
   }
 }

@@ -1,8 +1,22 @@
+import { InputMap, ProofData } from '@noir-lang/noir_js';
+
 import keypair_json from '@ultralane/circuits/bin/keypair/target/keypair.json';
+
+import {
+  getCreate2Address,
+  AddressLike,
+  resolveAddress,
+  BytesLike,
+} from 'ethers';
 
 import { circuit } from './utils';
 import { Field } from './field';
-import { hash } from './hash';
+import { hash, hash_prove } from './hash';
+
+export interface KeyPairRaw extends InputMap {
+  public_key: string;
+  private_key: string;
+}
 
 const _guard = {};
 
@@ -45,5 +59,27 @@ export class KeyPair {
 
   async sign(message: Field[]): Promise<Field> {
     return hash([this.privateKey!, ...message]);
+  }
+
+  async deriveStealthAddress(
+    i: number,
+    pool: AddressLike,
+    initCodeHash: BytesLike
+  ): Promise<{ salt: Field; address: string }> {
+    const salt = await hash([this.privateKey!, Field.from(i)]);
+    pool = await resolveAddress(pool);
+    const address = getCreate2Address(pool, salt.hex(), initCodeHash);
+    return { salt, address };
+  }
+
+  async proveStealthAddressOwnership(i: number): Promise<ProofData> {
+    return hash_prove([this.privateKey!, Field.from(i)]);
+  }
+
+  raw(): KeyPairRaw {
+    return {
+      public_key: this.publicKey!.raw(),
+      private_key: this.privateKey!.raw(),
+    };
   }
 }

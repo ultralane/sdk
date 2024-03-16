@@ -1,7 +1,32 @@
 import { MerkleTree, Field } from '../src';
-import 'jest';
 
 describe('MerkleTree', () => {
+  it('first', async () => {
+    const tree = new MerkleTree(32);
+    tree.insert(new Field(1n));
+    tree.insert(new Field(2n));
+
+    let root = await tree.calculateRoot();
+    // const time = Date.now();
+    let proof = await tree.zkProof(1);
+    // console.log(Date.now() - time);
+
+    expect(proof.publicInputs[0]).toEqual(root.hex());
+  }, 70_000);
+
+  it('second', async () => {
+    const tree = new MerkleTree(32);
+    tree.insert(new Field(1n));
+    tree.insert(new Field(2n));
+
+    let root = await tree.calculateRoot();
+    // const time = Date.now();
+    let proof = await tree.zkProof(1);
+    // console.log(Date.now() - time);
+
+    expect(proof.publicInputs[0]).toEqual(root.hex());
+  }, 70_000);
+
   it.skip('merkleProof 3', async () => {
     let depth = 3;
     const tree = new MerkleTree(depth);

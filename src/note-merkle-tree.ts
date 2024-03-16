@@ -1,3 +1,6 @@
+import split_join_16_json from '@ultralane/circuits/bin/split_join_16/target/split_join_16.json';
+import split_join_32_json from '@ultralane/circuits/bin/split_join_32/target/split_join_32.json';
+
 import { BigNumberish } from 'ethers';
 
 import { Field } from './field';
@@ -5,6 +8,7 @@ import { MerkleTree } from './merkle-tree';
 import { Note } from './note';
 import { Input } from './input';
 import { KeyPair } from './keypair';
+import { circuit } from './utils';
 import { Transaction } from './transaction';
 
 interface CreateTransactionArgs {
@@ -87,6 +91,16 @@ export class NoteMerkleTree extends MerkleTree {
       throw new Error('exactly 2 inputs are supported');
     }
 
+    // check
+    let noir = await circuit(this._getJson());
+    await noir.execute({
+      root: root.hex(),
+      inputs: inputs.map((x) => x.raw()),
+      outputs: [note.raw()],
+      deposit_amount: depositAmount.raw(),
+      ext_data: withdrawAddress.raw(),
+    });
+
     if (updateTree) {
       this.insert(await note.commitment());
     }
@@ -112,7 +126,7 @@ export class NoteMerkleTree extends MerkleTree {
     throw new Error(
       `Note not found from list of ${
         this.elements.length
-      } notes: ${JSON.stringify(note.toString())}`
+      } notes: ${JSON.stringify(note.raw())}`
     );
   }
 
@@ -124,5 +138,16 @@ export class NoteMerkleTree extends MerkleTree {
       await this.merkleProof(index),
       this.depth
     );
+  }
+
+  _getJson() {
+    switch (this.depth) {
+      case 16:
+        return split_join_16_json;
+      case 32:
+        return split_join_32_json;
+      default:
+        throw new Error('depth not supported: ' + this.depth);
+    }
   }
 }

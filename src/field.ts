@@ -1,3 +1,4 @@
+import { Commitable } from './utils';
 import {
   BigNumberish,
   toBigInt,
@@ -8,6 +9,8 @@ import {
 
 const PRIME =
   0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001n;
+
+export type FieldRaw = string;
 
 export class Field {
   public value: bigint;
@@ -37,6 +40,10 @@ export class Field {
 
   hex(): string {
     return zeroPadValue(toBeHex(this.value), 32);
+  }
+
+  raw(): FieldRaw {
+    return this.hex();
   }
 
   add(other: Field): Field {

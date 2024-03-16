@@ -1,3 +1,8 @@
+import { Noir, ProofData } from '@noir-lang/noir_js';
+
+import compute_merkle_root from '@ultralane/circuits/bin/compute_merkle_root/target/compute_merkle_root.json';
+
+import { circuit } from './utils';
 import { hash } from './hash';
 import { Field } from './field';
 
@@ -98,6 +103,24 @@ export class MerkleTree {
     return proof;
   }
 
+  /**
+   * Generates a zk proof for a given element
+   * @param index Index of the element to generate the zk proof for
+   * @returns A zk proof for the element
+   */
+  async zkProof(index: number): Promise<ProofData> {
+    const noir = await this._circuit();
+    let proof = await noir.generateProof({
+      leaf: (await this.elements[index]).hex(),
+      index: index,
+      hash_path: (await this.merkleProof(index)).map((x) => x.hex()),
+    });
+    if (!(await noir.verifyProof(proof))) {
+      throw new Error('Proof is invalid');
+    }
+    return proof;
+  }
+
   async _null_root(
     depth: number,
     null_leaf: Field = Field.zero()
@@ -116,5 +139,26 @@ export class MerkleTree {
     node = await hash([node, node]);
     this.null_root_cache[null_leaf.hex()][depth] = node;
     return node;
+  }
+
+  async _circuit(): Promise<Noir> {
+    let json;
+    switch (this.depth) {
+      // case 3:
+      //   json = merkle_3;
+      //   break;
+      // case 8:
+      //   json = merkle_8;
+      //   break;
+      // case 16:
+      //   json = merkle_16;
+      //   break;
+      case 32:
+        json = compute_merkle_root;
+        break;
+      default:
+        throw new Error('depth not supported: ' + this.depth);
+    }
+    return circuit(json);
   }
 }
