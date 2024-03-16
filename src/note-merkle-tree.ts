@@ -23,15 +23,18 @@ export class NoteMerkleTree extends MerkleTree {
   constructor(
     public depth: number,
     public numInputs: number = 2,
-    public numOutputs: number = 1
+    public numOutputs: number = 1,
+    insertNoteZero: boolean = true
   ) {
     super(depth);
-    this.insert(
-      // Note.zero().commitment()
-      Field.from(
-        6693032976676388986107828574443457670072006098614160789085314534828627402874n
-      )
-    );
+    if (insertNoteZero) {
+      this.insert(
+        // Note.zero().commitment()
+        Field.from(
+          6693032976676388986107828574443457670072006098614160789085314534828627402874n
+        )
+      );
+    }
     if (this.numOutputs !== 1) {
       throw new Error('exactly 1 outputs are currently supported');
     }
@@ -49,6 +52,19 @@ export class NoteMerkleTree extends MerkleTree {
   static fromJson(json: any): NoteMerkleTree {
     let tree = new NoteMerkleTree(json.depth, json.numInputs, json.numOutputs);
     tree.elements = json.elements.map((x: string) => Field.from(x));
+    return tree;
+  }
+
+  static fromAllNoteCommitments(
+    commitments: bigint[],
+    depth: number,
+    numInputs: number = 2,
+    numOutputs: number = 1
+  ) {
+    let tree = new NoteMerkleTree(depth, numInputs, numOutputs, false);
+    for (let commitment of commitments) {
+      tree.insert(Field.from(commitment));
+    }
     return tree;
   }
 
