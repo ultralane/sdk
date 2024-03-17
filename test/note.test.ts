@@ -1,4 +1,5 @@
 import { Field, Note, KeyPair, logtime } from '../src';
+import 'jest';
 
 describe('Note', () => {
   it('should be correct', async () => {

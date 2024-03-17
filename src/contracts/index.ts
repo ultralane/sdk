@@ -9,13 +9,13 @@ import ArbsepUSDC from './deployments/arbsep/USDC.json';
 import OpsepUltralane from './deployments/opsep/Ultralane.json';
 import OpsepUSDC from './deployments/opsep/USDC.json';
 
-import { UltraVerifier__factory, USDC__factory } from './typechain-types';
+import { Ultralane__factory, USDC__factory } from './typechain-types';
 
 export async function getContracts(runner: ContractRunner) {
   const network = await runner.provider?.getNetwork();
   const addresses = getAddresses(network!.chainId);
   return {
-    ultralane: UltraVerifier__factory.connect(addresses.ultralane, runner),
+    ultralane: Ultralane__factory.connect(addresses.ultralane, runner),
     usdc: USDC__factory.connect(addresses.usdc, runner),
   };
 }
