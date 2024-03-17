@@ -99,7 +99,7 @@ export class NoteMerkleTree extends MerkleTree {
       throw new Error('Transaction amount exceeds the sum of input notes');
     }
 
-    const note = new Note(sum.add(depositAmount), keypair, Field.from(0));
+    const note = new Note(sum.add(depositAmount), keypair, Field.random());
 
     const root = await this.calculateRoot();
 
