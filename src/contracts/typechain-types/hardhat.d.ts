@@ -14,6 +14,26 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "IPostDispatchHook",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPostDispatchHook__factory>;
+    getContractFactory(
+      name: "IInterchainSecurityModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IInterchainSecurityModule__factory>;
+    getContractFactory(
+      name: "ISpecifiesInterchainSecurityModule",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISpecifiesInterchainSecurityModule__factory>;
+    getContractFactory(
+      name: "IMailbox",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IMailbox__factory>;
+    getContractFactory(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ownable__factory>;
+    getContractFactory(
       name: "IERC1155Errors",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC1155Errors__factory>;
@@ -74,13 +94,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UltraVerifier__factory>;
     getContractFactory(
+      name: "BaseUltraVerifier",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.BaseUltraVerifier__factory>;
+    getContractFactory(
+      name: "UltraVerifier",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UltraVerifier__factory>;
+    getContractFactory(
       name: "MerkleTreeWithHistory",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MerkleTreeWithHistory__factory>;
     getContractFactory(
-      name: "Pool",
+      name: "MixerPool",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Pool__factory>;
+    ): Promise<Contracts.MixerPool__factory>;
     getContractFactory(
       name: "StealthAddress",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -90,6 +118,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Poseidon2Test__factory>;
     getContractFactory(
+      name: "TrustlessWithdraw",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TrustlessWithdraw__factory>;
+    getContractFactory(
+      name: "Ultralane",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Ultralane__factory>;
+    getContractFactory(
       name: "USDC",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.USDC__factory>;
@@ -97,6 +133,10 @@ declare module "hardhat/types/runtime" {
       name: "Hash2Verifier",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Hash2Verifier__factory>;
+    getContractFactory(
+      name: "Input16Verifier",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Input16Verifier__factory>;
     getContractFactory(
       name: "NoteVerifier",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -111,6 +151,31 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.SplitJoin32Verifier__factory>;
 
     getContractAt(
+      name: "IPostDispatchHook",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPostDispatchHook>;
+    getContractAt(
+      name: "IInterchainSecurityModule",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IInterchainSecurityModule>;
+    getContractAt(
+      name: "ISpecifiesInterchainSecurityModule",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISpecifiesInterchainSecurityModule>;
+    getContractAt(
+      name: "IMailbox",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IMailbox>;
+    getContractAt(
+      name: "Ownable",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
       name: "IERC1155Errors",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -186,15 +251,25 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.UltraVerifier>;
     getContractAt(
+      name: "BaseUltraVerifier",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseUltraVerifier>;
+    getContractAt(
+      name: "UltraVerifier",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UltraVerifier>;
+    getContractAt(
       name: "MerkleTreeWithHistory",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.MerkleTreeWithHistory>;
     getContractAt(
-      name: "Pool",
+      name: "MixerPool",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
-    ): Promise<Contracts.Pool>;
+    ): Promise<Contracts.MixerPool>;
     getContractAt(
       name: "StealthAddress",
       address: string | ethers.Addressable,
@@ -206,6 +281,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Poseidon2Test>;
     getContractAt(
+      name: "TrustlessWithdraw",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TrustlessWithdraw>;
+    getContractAt(
+      name: "Ultralane",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ultralane>;
+    getContractAt(
       name: "USDC",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -215,6 +300,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.Hash2Verifier>;
+    getContractAt(
+      name: "Input16Verifier",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Input16Verifier>;
     getContractAt(
       name: "NoteVerifier",
       address: string | ethers.Addressable,
@@ -232,6 +322,26 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.SplitJoin32Verifier>;
 
     deployContract(
+      name: "IPostDispatchHook",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPostDispatchHook>;
+    deployContract(
+      name: "IInterchainSecurityModule",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IInterchainSecurityModule>;
+    deployContract(
+      name: "ISpecifiesInterchainSecurityModule",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISpecifiesInterchainSecurityModule>;
+    deployContract(
+      name: "IMailbox",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IMailbox>;
+    deployContract(
+      name: "Ownable",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Ownable>;
+    deployContract(
       name: "IERC1155Errors",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC1155Errors>;
@@ -292,13 +402,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.UltraVerifier>;
     deployContract(
+      name: "BaseUltraVerifier",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.BaseUltraVerifier>;
+    deployContract(
+      name: "UltraVerifier",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UltraVerifier>;
+    deployContract(
       name: "MerkleTreeWithHistory",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MerkleTreeWithHistory>;
     deployContract(
-      name: "Pool",
+      name: "MixerPool",
       signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.Pool>;
+    ): Promise<Contracts.MixerPool>;
     deployContract(
       name: "StealthAddress",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -308,6 +426,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Poseidon2Test>;
     deployContract(
+      name: "TrustlessWithdraw",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TrustlessWithdraw>;
+    deployContract(
+      name: "Ultralane",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Ultralane>;
+    deployContract(
       name: "USDC",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.USDC>;
@@ -315,6 +441,10 @@ declare module "hardhat/types/runtime" {
       name: "Hash2Verifier",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Hash2Verifier>;
+    deployContract(
+      name: "Input16Verifier",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Input16Verifier>;
     deployContract(
       name: "NoteVerifier",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -329,6 +459,31 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.SplitJoin32Verifier>;
 
     deployContract(
+      name: "IPostDispatchHook",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPostDispatchHook>;
+    deployContract(
+      name: "IInterchainSecurityModule",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IInterchainSecurityModule>;
+    deployContract(
+      name: "ISpecifiesInterchainSecurityModule",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ISpecifiesInterchainSecurityModule>;
+    deployContract(
+      name: "IMailbox",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IMailbox>;
+    deployContract(
+      name: "Ownable",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Ownable>;
+    deployContract(
       name: "IERC1155Errors",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -404,15 +559,25 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.UltraVerifier>;
     deployContract(
+      name: "BaseUltraVerifier",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.BaseUltraVerifier>;
+    deployContract(
+      name: "UltraVerifier",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UltraVerifier>;
+    deployContract(
       name: "MerkleTreeWithHistory",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MerkleTreeWithHistory>;
     deployContract(
-      name: "Pool",
+      name: "MixerPool",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.Pool>;
+    ): Promise<Contracts.MixerPool>;
     deployContract(
       name: "StealthAddress",
       args: any[],
@@ -424,6 +589,16 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Poseidon2Test>;
     deployContract(
+      name: "TrustlessWithdraw",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TrustlessWithdraw>;
+    deployContract(
+      name: "Ultralane",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Ultralane>;
+    deployContract(
       name: "USDC",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -433,6 +608,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.Hash2Verifier>;
+    deployContract(
+      name: "Input16Verifier",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Input16Verifier>;
     deployContract(
       name: "NoteVerifier",
       args: any[],

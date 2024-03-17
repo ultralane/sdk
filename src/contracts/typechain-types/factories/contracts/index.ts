@@ -4,6 +4,8 @@
 export * as verifierSol from "./Verifier.sol";
 export * as test from "./test";
 export { MerkleTreeWithHistory__factory } from "./MerkleTreeWithHistory__factory";
-export { Pool__factory } from "./Pool__factory";
+export { MixerPool__factory } from "./MixerPool__factory";
 export { StealthAddress__factory } from "./StealthAddress__factory";
+export { TrustlessWithdraw__factory } from "./TrustlessWithdraw__factory";
 export { USDC__factory } from "./USDC__factory";
+export { Ultralane__factory } from "./Ultralane__factory";

@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { Hash2Verifier } from "./Hash2Verifier";
+export type { Input16Verifier } from "./Input16Verifier";
 export type { NoteVerifier } from "./NoteVerifier";
 export type { SplitJoin16Verifier } from "./SplitJoin16Verifier";
 export type { SplitJoin32Verifier } from "./SplitJoin32Verifier";

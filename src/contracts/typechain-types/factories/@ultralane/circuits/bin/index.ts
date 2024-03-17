@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as hash2 from "./hash_2";
+export * as input16 from "./input_16";
 export * as note from "./note";
 export * as splitJoin16 from "./split_join_16";
 export * as splitJoin32 from "./split_join_32";
