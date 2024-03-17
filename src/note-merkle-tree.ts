@@ -87,12 +87,12 @@ export class NoteMerkleTree extends MerkleTree {
     let inputs: Input[] = [];
     let sum = Field.zero();
     for (let note of inputNotes) {
-      const input = await this._createInput(note);
+      const input = await this.createInput(note);
       inputs.push(input);
       sum = sum.add(input.note.amount);
     }
     for (let i = inputs.length; i < this.numInputs; i++) {
-      inputs.push(await this._createInput(Note.zero()));
+      inputs.push(await this.createInput(Note.zero()));
     }
 
     if (depositAmount.isNeg() && depositAmount.neg().gt(sum)) {
@@ -146,7 +146,7 @@ export class NoteMerkleTree extends MerkleTree {
     );
   }
 
-  async _createInput(note: Note) {
+  async createInput(note: Note) {
     const index = await this.findNoteIndex(note);
     return new Input(
       note,
