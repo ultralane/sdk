@@ -61,7 +61,7 @@
   "dependencies": {
     "@noir-lang/backend_barretenberg": "0.25.0-00d6494.nightly",
     "@noir-lang/noir_js": "0.25.0-00d6494.nightly",
-    "@ultralane/circuits": "^0.1.0",
+    "@ultralane/circuits": "^0.1.2",
     "ethers": "^6.11.1"
   }
 }
