@@ -311,9 +311,9 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "Field[2]",
+        internalType: "Field[]",
         name: "nullifiers",
-        type: "uint256[2]",
+        type: "uint256[]",
       },
       {
         internalType: "Field",

@@ -110,6 +110,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MixerPool__factory>;
     getContractFactory(
+      name: "Poseidon2Test",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Poseidon2Test__factory>;
+    getContractFactory(
+      name: "Poseidon2Test",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Poseidon2Test__factory>;
+    getContractFactory(
       name: "StealthAddress",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.StealthAddress__factory>;
@@ -271,6 +279,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MixerPool>;
     getContractAt(
+      name: "Poseidon2Test",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Poseidon2Test>;
+    getContractAt(
+      name: "Poseidon2Test",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Poseidon2Test>;
+    getContractAt(
       name: "StealthAddress",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -418,6 +436,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MixerPool>;
     deployContract(
+      name: "Poseidon2Test",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Poseidon2Test>;
+    deployContract(
+      name: "Poseidon2Test",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Poseidon2Test>;
+    deployContract(
       name: "StealthAddress",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.StealthAddress>;
@@ -578,6 +604,16 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MixerPool>;
+    deployContract(
+      name: "Poseidon2Test",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Poseidon2Test>;
+    deployContract(
+      name: "Poseidon2Test",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Poseidon2Test>;
     deployContract(
       name: "StealthAddress",
       args: any[],

@@ -103,12 +103,7 @@ export interface MixerPoolInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "crosschainTransact",
-    values: [
-      AddressLike,
-      BigNumberish,
-      [BigNumberish, BigNumberish],
-      BigNumberish
-    ]
+    values: [AddressLike, BigNumberish, BigNumberish[], BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "currentRootIndex",
@@ -377,7 +372,7 @@ export interface MixerPool extends BaseContract {
     [
       destination: AddressLike,
       amount: BigNumberish,
-      nullifiers: [BigNumberish, BigNumberish],
+      nullifiers: BigNumberish[],
       noteCommitment: BigNumberish
     ],
     [void],
@@ -491,7 +486,7 @@ export interface MixerPool extends BaseContract {
     [
       destination: AddressLike,
       amount: BigNumberish,
-      nullifiers: [BigNumberish, BigNumberish],
+      nullifiers: BigNumberish[],
       noteCommitment: BigNumberish
     ],
     [void],
