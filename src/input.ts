@@ -1,6 +1,6 @@
 import { InputMap } from '@noir-lang/noir_js';
 
-import input_json from '@ultralane/circuits/bin/input/target/input.json';
+import input_16_json from '@ultralane/circuits/bin/input_16/target/input_16.json';
 
 import { Field, FieldRaw } from './field';
 import { Note, NoteRaw } from './note';
@@ -17,7 +17,8 @@ export class Input {
     public note: Note,
     public pathIndex: Field,
     public pathElements: Field[],
-    public MERKLE_DEPTH = 32
+    public root: Field,
+    public MERKLE_DEPTH = 16
   ) {
     if (pathElements.length !== MERKLE_DEPTH) {
       throw new Error(
@@ -27,21 +28,23 @@ export class Input {
   }
 
   static async circuit() {
-    return circuit(input_json);
+    return circuit(input_16_json);
   }
 
   static async random(
     note?: Note,
     pathIndex?: Field,
     pathElements?: Field[],
-    MERKLE_DEPTH = 32
+    root?: Field,
+    MERKLE_DEPTH = 16
   ) {
     pathElements =
       pathElements ?? new Array(MERKLE_DEPTH).fill(0).map(() => Field.random());
     return new Input(
       note ?? (await Note.random()),
       pathIndex ?? Field.random(),
-      pathElements
+      pathElements,
+      root ?? Field.random()
     );
   }
 
@@ -51,5 +54,15 @@ export class Input {
       path_index: this.pathIndex.raw(),
       path_elements: this.pathElements.map((e) => e.raw()),
     };
+  }
+
+  async prove(extAddress: string) {
+    const noir = await circuit(input_16_json);
+    const proof = await noir.generateProof({
+      root: this.root.raw(),
+      input: this.raw(),
+      _ext_address: Field.from(extAddress).raw(),
+    });
+    return proof;
   }
 }

@@ -152,6 +152,7 @@ export class NoteMerkleTree extends MerkleTree {
       note,
       new Field(index),
       await this.merkleProof(index),
+      await this.calculateRoot(),
       this.depth
     );
   }
