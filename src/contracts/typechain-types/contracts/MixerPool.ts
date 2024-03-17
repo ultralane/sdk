@@ -103,7 +103,12 @@ export interface MixerPoolInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "crosschainTransact",
-    values: [AddressLike, BigNumberish, BigNumberish]
+    values: [
+      AddressLike,
+      BigNumberish,
+      [BigNumberish, BigNumberish],
+      BigNumberish
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "currentRootIndex",
@@ -369,7 +374,12 @@ export interface MixerPool extends BaseContract {
   compute: TypedContractMethod<[salt: BigNumberish], [string], "view">;
 
   crosschainTransact: TypedContractMethod<
-    [destination: AddressLike, amount: BigNumberish, nullifier: BigNumberish],
+    [
+      destination: AddressLike,
+      amount: BigNumberish,
+      nullifiers: [BigNumberish, BigNumberish],
+      noteCommitment: BigNumberish
+    ],
     [void],
     "nonpayable"
   >;
@@ -478,7 +488,12 @@ export interface MixerPool extends BaseContract {
   getFunction(
     nameOrSignature: "crosschainTransact"
   ): TypedContractMethod<
-    [destination: AddressLike, amount: BigNumberish, nullifier: BigNumberish],
+    [
+      destination: AddressLike,
+      amount: BigNumberish,
+      nullifiers: [BigNumberish, BigNumberish],
+      noteCommitment: BigNumberish
+    ],
     [void],
     "nonpayable"
   >;
